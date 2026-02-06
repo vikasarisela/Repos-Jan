@@ -1,6 +1,6 @@
 #!/bin/bash
 
-Person1=$1
+Person1=$1   #arguments can be passed while executing 
 Person2=$2
 
 echo "$Person1 here"
