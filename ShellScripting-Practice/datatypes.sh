@@ -13,3 +13,6 @@ Leaders=("trump" "trudo" "modi")
 echo "all leaders ${Leaders[@]}"
 echo "all leaders ${Leaders[1]}"
 echo "all leaders ${Leaders[2]}"
+
+Date=$(date +%s)
+echo "timestamp $Date"
