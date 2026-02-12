@@ -9,6 +9,7 @@ N="\e[0m"
 LOG_FOLDER=/var/log/shellscripting-logs
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1)   #$0 you will get script name 
 LOG_FILE="$LOG_FOLDER/$SCRIPT_NAME.log"
+SCRIPT_DIR=$PWD
 
 mkdir -p $LOG_FOLDER
 echo "script started executed at $(date)"  | tee -a $LOG_FILE
@@ -38,16 +39,25 @@ validate $? "Nodejs Module Enabled"
 dnf install nodejs -y  &>>$LOG_FILE
 validate $? "Install Nodejs Module"
 
+
+id roboshop &>>$LOG_FILE
+if [ $? -ne 0 ]; then
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
 validate $? "Creating System User"
+else 
+echo -e "User Already Existing .. Skipping.."
+fi
 
-mkdir /app  &>>$LOG_FILE
+mkdir -p /app  
 validate $? "Creating App Directory"
 
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip   &>>$LOG_FILE
 validate $? "Downloading Catalogue Application"
 cd /app  &>>$LOG_FILE
 validate $? "Changing to app directory"
+
+rm -rf /app/*
+validate $? "Removing Existing Code"
 unzip /tmp/catalogue.zip &>>$LOG_FILE
 validate $? "Unzipping Catalogue Applcation"
 
@@ -56,7 +66,7 @@ validate $? "changing directory to app"
 npm install &>>$LOG_FILE
 validate $? "Install Dependencies.."
 
-cp catalogue.service /etc/systemd/system/catalogue.service &>>$LOG_FILE
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service &>>$LOG_FILE
 validate $? "Copying catalogue Service"
 systemctl daemon-reload &>>$LOG_FILE
 validate $? "Reloading Daemon"
@@ -65,7 +75,7 @@ systemctl enable catalogue  &>>$LOG_FILE
 validate $? "Enable Catalogue Service"
 systemctl start catalogue &>>$LOG_FILE
 validate $? "Starging Catalogue Service"
-cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
+cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
 validate $? "Copying MongoRepo to yum repos.."
 dnf install mongodb-mongosh -y &>>$LOG_FILE
 validate $? "Installing Mongodb client.."
@@ -73,3 +83,6 @@ mongosh --host mongodb.cloudskills.fun </app/db/master-data.js  &>>$LOG_FILE
 validate $? "Connecting to Mongodb and loading catalogue products"
 systemctl restart catalogue  &>>$LOG_FILE
 validate $? "Restarted Catalogue Service.."
+
+# Tocheck already database exist
+# mongosh mongodb.cloudskills.fun --quiet --eval "db.getMongo().getDBNames().includes('catalogue')"
