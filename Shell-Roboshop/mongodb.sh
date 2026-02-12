@@ -27,7 +27,10 @@ if [ $1 -ne 0 ]; then    # 0 is success and 1-127 is failure
      exit 1
   else
     echo -e "$2 .... $G SUCCESSFUL $N.." | tee -a $LOG_FILE    
+  fi
 }
+
+
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo
 validate $? "Adding Mongo Repo"
