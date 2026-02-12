@@ -43,11 +43,4 @@ validate $? "Enabled MongoDB"
 systemctl start mongod &>>$LOG_FILE
 validate $? "Started MongoDB" 
 
-dnf list installed mongodb-mongosh
-if [$? -ne 0]; then
-dnf install mongodb-mongosh -y 
-validate $? "mongodb-mongosh"
-else 
-echo "mongodb-mongosh already exists .... $G Skipping $N"
-
 
