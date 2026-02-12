@@ -79,8 +79,14 @@ cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
 validate $? "Copying MongoRepo to yum repos.."
 dnf install mongodb-mongosh -y &>>$LOG_FILE
 validate $? "Installing Mongodb client.."
-mongosh --host mongodb.cloudskills.fun </app/db/master-data.js  &>>$LOG_FILE
-validate $? "Connecting to Mongodb and loading catalogue products"
+
+INDEX=$(mongosh mongodb.cloudskills.fun --quiet --eval "db.getMongo().getDBNames().includes('catalogue')")
+if [ $INDEX -le 0 ]; then 
+    mongosh --host mongodb.cloudskills.fun </app/db/master-data.js  &>>$LOG_FILE
+    validate $? "Connecting to Mongodb and loading catalogue products"
+    else 
+    echo -e "Catalogue Products already loaded ... $Y SKIPPING.. $N"
+fi
 systemctl restart catalogue  &>>$LOG_FILE
 validate $? "Restarted Catalogue Service.."
 
