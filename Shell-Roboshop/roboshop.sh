@@ -14,7 +14,7 @@ Instance_Id=$(aws ec2 run-instances \
 --query 'Instances[0].InstanceId' \
 --output text)
 
- if [$instance -ne "frontend"]; then
+ if [$instance != "frontend"]; then
 aws ec2 describe-instances \
     --instance-ids $Instance_Id \
     --query 'Reservations[0].Instances[0].PrivateIpAddress' \
