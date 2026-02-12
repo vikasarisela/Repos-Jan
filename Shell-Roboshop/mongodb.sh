@@ -21,13 +21,13 @@ fi
 
 
 #Calling Function recieve inputs through args 
-validate () {
-if [$1 -ne 0]; then    # 0 is success and 1-127 is failure 
-  echo -e "$2 .... $R FAILURE $N" | tee -a $LOG_FILE
-  exit 1
+validate(){
+if [ $1 -ne 0 ]; then    # 0 is success and 1-127 is failure 
+     echo -e "$2 .... $R FAILURE $N" | tee -a $LOG_FILE
+     exit 1
   else
-  echo -e "$2 .... $G SUCCESSFUL $N.." | tee -a $LOG_FILE    
-  }
+    echo -e "$2 .... $G SUCCESSFUL $N.." | tee -a $LOG_FILE    
+}
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo
 validate $? "Adding Mongo Repo"
