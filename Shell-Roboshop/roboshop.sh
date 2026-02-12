@@ -3,6 +3,7 @@
 AMI_ID=ami-0220d79f3f480ecf5
 SECURITY_GROUP=sg-05070ca66b56218cd
 DOMAIN_NAME="cloudskills.fun"
+ZONE_ID="Z026569833PO0BSJDM"
 
 
 for instance in $@
@@ -34,7 +35,7 @@ echo "$IP, $instance"
 
 
 aws route53 change-resource-record-sets \
-    --hosted-zone-id Z026569833PO0BSJDM4X5 \
+    --hosted-zone-id $ZONE_ID \
     --change-batch '
     {
         "Comment": "Testing creating a record set"
