@@ -52,7 +52,7 @@ cd /usr/share/nginx/html  &>>$LOG_FILE
 unzip /tmp/frontend.zip
 validate $? "Unzipping .. front end"
 
-cp $SCRIPT_DIR/nginx.service /etc/nginx/nginx.conf  &>>$LOG_FILE
+cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf  &>>$LOG_FILE
 validate $? "Copying nginx service"
 
 systemctl restart nginx   
