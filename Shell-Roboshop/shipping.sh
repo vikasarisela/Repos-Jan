@@ -32,7 +32,14 @@ if [ $1 -ne 0 ]; then    # 0 is success and 1-127 is failure
 dnf install maven -y &>>$LOG_FILE
 validate $? "Installing Maven"
 
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop  &>>$LOG_FILE
+id roboshop &>>$LOG_FILE
+if [ $? -ne 0 ]; then
+  useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
+  validate $? "Creating System User"
+else 
+   echo -e "User Already Existing .. Skipping.."
+fi
+
 validate $? "Creating system user"
 mkdir /app 
 
