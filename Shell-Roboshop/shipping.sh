@@ -61,8 +61,8 @@ validate $? "Install MYSQL"
 mysql -h mysql.cloudskills.fun -uroot -pRoboShop@1 -e 'use cities'  &>>$LOG_FILE
 if [ $? -ne 0 ]; then   # If already exist then it is 0 or if non-zero then schemas are not created 
 mysql -h mysql.cloudskills.fun -uroot -pRoboShop@1 < /app/db/schema.sql
-mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/db/app-user.sql 
-mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/db/master-data.sql
+mysql -h mysql.cloudskills.fun -uroot -pRoboShop@1 < /app/db/app-user.sql 
+mysql -h mysql.cloudskills.fun -uroot -pRoboShop@1 < /app/db/master-data.sql
 else
   echo "Shipping data is already loaded $Y SKIPPING $N"
 fi
