@@ -55,5 +55,5 @@ validate $? "Unzipping .. front end"
 cp $SCRIPT_DIR/nginx.service /etc/nginx/nginx.conf  &>>$LOG_FILE
 validate $? "Copying nginx service"
 
-systemctl restart nginx   &>>$LOG_FILE
+systemctl restart nginx   
 validate $? "Resarting Nginx"
