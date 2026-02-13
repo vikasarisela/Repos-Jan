@@ -31,7 +31,6 @@ if [ $1 -ne 0 ]; then    # 0 is success and 1-127 is failure
 }
 
 
-
 cp mongo.repo /etc/yum.repos.d/mongo.repo
 validate $? "Adding Mongo Repo"
 
