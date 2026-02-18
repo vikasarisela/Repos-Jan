@@ -16,7 +16,7 @@ validate $? "Installing Mongodb client.."
 
 INDEX=$(mongosh mongodb.cloudskills.fun --quiet --eval "db.getMongo().getDBNames().includes('catalogue')")
 if [ $INDEX -le 0 ]; then 
-    mongosh --host $MONGODB_HOST </app/db/master-data.js  &>>$LOG_FILE
+    mongosh --host mongodb.cloudskills.fun </app/db/master-data.js  &>>$LOG_FILE
     validate $? "Load $app_name products"
 else 
     echo -e "$app_name products already loaded ... $Y SKIPPING.. $N"
