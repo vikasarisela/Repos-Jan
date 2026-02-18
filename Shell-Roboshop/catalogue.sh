@@ -61,32 +61,29 @@ validate $? "Removing Existing Code"
 unzip /tmp/catalogue.zip &>>$LOG_FILE
 validate $? "Unzipping Catalogue Applcation"
 
-cd /app  &>>$LOG_FILE
-validate $? "changing directory to app"  
+ 
 npm install &>>$LOG_FILE
 validate $? "Install Dependencies.."
 
 cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service &>>$LOG_FILE
 validate $? "Copying catalogue Service"
-systemctl daemon-reload &>>$LOG_FILE
-validate $? "Reloading Daemon"
 
+systemctl daemon-reload &>>$LOG_FILE
 systemctl enable catalogue  &>>$LOG_FILE
 validate $? "Enable Catalogue Service"
-systemctl start catalogue &>>$LOG_FILE
-validate $? "Starging Catalogue Service"
+
+
 cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
 validate $? "Copying MongoRepo to yum repos.."
 dnf install mongodb-mongosh -y &>>$LOG_FILE
 validate $? "Installing Mongodb client.."
 
-
-INDEX=$(mongosh mongodb.cloudskills.fun --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')")
-if [ $INDEX -le 0 ]; then
-    mongosh --host mongodb.cloudskills.fun </app/db/master-data.js &>>$LOG_FILE
-    VALIDATE $? "Load catalogue products"
-else
-    echo -e "Catalogue products already loaded ... $Y SKIPPING $N"
+INDEX=$(mongosh mongodb.cloudskills.fun --quiet --eval "db.getMongo().getDBNames().includes('catalogue')")
+if [ $INDEX -le 0 ]; then 
+    mongosh --host mongodb.cloudskills.fun </app/db/master-data.js  &>>$LOG_FILE
+    validate $? "Connecting to Mongodb and loading catalogue products"
+else 
+    echo -e "Catalogue Products already loaded ... $Y SKIPPING.. $N"
 fi
 
 systemctl restart catalogue  &>>$LOG_FILE
