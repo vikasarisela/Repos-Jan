@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source ./common.sh
-
+app_name=redis
 check_root
 
 dnf module disable $app_name -y   &>>$LOG_FILE
