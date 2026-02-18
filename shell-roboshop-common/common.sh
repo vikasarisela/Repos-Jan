@@ -45,6 +45,21 @@ npm install &>>$LOG_FILE
 validate $? "Install Dependencies.."
 }
 
+java_setup(){
+  dnf install maven -y &>>$LOG_FILE
+  validate $? "Installing Maven"
+  mvn clean package   &>>$LOG_FILE
+  validate $? "Installing Dependencies"
+  mv target/shipping-1.0.jar shipping.jar   &>>$LOG_FILE
+   validate $? "Renaming the artifact"
+}
+
+python_setup(){
+    dnf install python3 gcc python3-devel -y &>>$LOG_FILE
+    validate $? "Installing Python3"
+    pip3 install -r requirements.txt &>>$LOG_FILE
+    validate $? "Installing dependencies"
+}
 
 app_setup(){
   id roboshop &>>$LOG_FILE
