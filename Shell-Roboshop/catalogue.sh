@@ -78,14 +78,13 @@ validate $? "Copying MongoRepo to yum repos.."
 dnf install mongodb-mongosh -y &>>$LOG_FILE
 validate $? "Installing Mongodb client.."
 
-INDEX=$(mongosh mongodb.cloudskills.fun --quiet --eval "db.getMongo().getDBNames().includes('catalogue')")
-if [ $INDEX -le 0 ]; then 
-    mongosh --host mongodb.cloudskills.fun </app/db/master-data.js  &>>$LOG_FILE
-    validate $? "Connecting to Mongodb and loading catalogue products"
-else 
-    echo -e "Catalogue Products already loaded ... $Y SKIPPING.. $N"
+INDEX=$(mongosh mongodb.cloudskills.fun --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')")
+if [ $INDEX -le 0 ]; then
+    mongosh --host mongodb.cloudskills.fun </app/db/master-data.js &>>$LOG_FILE
+    validate $? "Load catalogue products"
+else
+    echo -e "Catalogue products already loaded ... $Y SKIPPING $N"
 fi
-
 systemctl restart catalogue  &>>$LOG_FILE
 validate $? "Restarted Catalogue Service.."
 
