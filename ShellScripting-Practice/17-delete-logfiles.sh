@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -euo pipefail
 USERID=$(id -u)
 R="\e[31m"
 G="\e[32m"
@@ -15,10 +15,10 @@ echo "Script started executed at: $(date)" | tee -a $LOG_FILE
 
 SOURCE_DIR=/home/ec2-user/app-logs
 
-if [ ! -d $SOURCE_DIR ]; then
+ if [ ! -d $SOURCE_DIR ]; then
     echo -e "ERROR:: $SOURCE_DIR does not exist"
     exit 1
-fi
+ fi
 
 FILES_TO_DELETE=$(find $SOURCE_DIR -name "*.log" -type f -mtime +14)
 
