@@ -7,6 +7,6 @@
   tasks: 
   - name: printing the info
     vars:
-      nme: "navish"
+       nme: "navish"
     ansible.builtin.debug:
       msg: "Info : {{nme}}, {{designation}}"
