@@ -5,6 +5,8 @@
     nme: "vikas"
     designation: "DevOps Engineer"
   tasks: 
-    - name: printing the info
+      name: printing the info
+      vars:
+        nme: "navish"
       ansible.builtin.debug:
-      msg: "Info : {{name}}, {{designation}}"
+      msg: "Info : {{nme}}, {{designation}}"
