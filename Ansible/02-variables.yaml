@@ -1,0 +1,10 @@
+- name: play level variables
+  hosts: local
+  connection: local 
+  vars:
+    - name: "vikas"
+    - designation: "DevOps Engineer"
+  tasks: 
+  - name: printing the info
+    ansible.builtin.debug:
+      msg: "Info : {{name}}, {{designation}}"
