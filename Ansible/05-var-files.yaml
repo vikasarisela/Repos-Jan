@@ -6,4 +6,4 @@
   tasks:
   - name: print infor
     ansible.builtin.debug:
-      msg: "Info : {{name}}, {{designation}}"
+      msg: "Info : {{nme}}, {{designation}}"
