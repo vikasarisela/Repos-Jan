@@ -1,0 +1,6 @@
+- name: ping the server
+  hosts: [frontend]
+  #list of task/collections/modules
+  tasks: 
+  - name: ping
+    ansible.builtin.ping:

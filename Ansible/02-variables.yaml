@@ -8,3 +8,16 @@
     - name: printing the info
       ansible.builtin.debug:
       msg: "Info : {{name}}, {{designation}}"
+
+
+# - name: Configure Web Server
+#   hosts: webservers
+#   vars:
+#     http_port: 80
+#     app_name: "MyWebApp"
+#   vars_files:
+#     - secret_vars.yml
+#   tasks:
+#     - name: Show port
+#       debug:
+#         msg: "The app {{ app_name }} is on port {{ http_port }}"

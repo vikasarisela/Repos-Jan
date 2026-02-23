@@ -1,0 +1,9 @@
+- name: variables from arguments
+  hosts: local
+  connection: local
+  tasks:
+  - name: print infor
+    ansible.builtin.debug:
+      msg: "Info : {{nmee}}, {{designationn}}"
+
+      #Ansible-playbook -I  inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 -e "nmee=vikas" -e "designation=DevOps Engineer" 

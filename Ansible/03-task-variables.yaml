@@ -10,3 +10,5 @@
        nme: "navish"
     ansible.builtin.debug:
       msg: "Info : {{nme}}, {{designation}}"
+
+      #navish will print
