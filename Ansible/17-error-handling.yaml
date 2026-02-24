@@ -3,23 +3,11 @@
   connection: local
   become: yes
   tasks:
-  # - name: check user exist or not
-  #   ansible.builtin.command: id roboshop
-  #   register: user_output
-    # ignore_errors: false
-    #we are saying to ignore error to ansible so we can handle further
-    - name: Create user vikas
-      ansible.builtin.user:
-      name: vikas
-      state: present
-    
-    - name: Print message
-      ansible.builtin.debug:
-          msg: "Hello Vikas"
-  # - name: print the output
-  #   ansible.builtin.debug:
-  #     msg: "{{ user_output }}"
-
-  # # - name: create user
-  #   ansible.builtin.command: useradd roboshop
-  #   when: user_output.rc != 0
+  - name: Create user vikas
+    ansible.builtin.user:
+    name: vikas
+    state: present
+  
+  - name: Print message
+    ansible.builtin.debug:
+        msg: "Hello Vikas"
