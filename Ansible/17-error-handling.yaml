@@ -8,10 +8,11 @@
     register: user_output
     # ignore_errors: false
     #we are saying to ignore error to ansible so we can handle further
+
   
-  # - name: print the output
-  #   ansible.builtin.debug:
-  #     msg: "{{ user_output }}"
+  - name: print the output
+    ansible.builtin.debug:
+      msg: "{{ i am....... }}"
 
   # - name: create user
   #   ansible.builtin.command: useradd roboshop
