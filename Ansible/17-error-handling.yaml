@@ -1,0 +1,13 @@
+- name: user creation
+  hosts: local
+  connection: local
+  become: yes
+  tasks:
+  - name: Create user vikas
+    ansible.builtin.user:
+      name: vikas
+      state: present
+  
+  - name: Print message
+    ansible.builtin.debug:
+        msg: "Hello Vikas.."
