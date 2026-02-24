@@ -5,8 +5,8 @@
   tasks:
   - name: Create user vikas
     ansible.builtin.user:
-    name: vikas
-    state: present
+      name: vikas
+      state: present
   
   - name: Print message
     ansible.builtin.debug:
