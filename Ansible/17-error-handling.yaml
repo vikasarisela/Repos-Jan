@@ -9,10 +9,10 @@
     # ignore_errors: false
     #we are saying to ignore error to ansible so we can handle further
   
-  - name: print the output
-    ansible.builtin.debug:
-      msg: "{{ user_output }}"
+  # - name: print the output
+  #   ansible.builtin.debug:
+  #     msg: "{{ user_output }}"
 
-  - name: create user
-    ansible.builtin.command: useradd roboshop
-    when: user_output.rc != 0
+  # - name: create user
+  #   ansible.builtin.command: useradd roboshop
+  #   when: user_output.rc != 0
