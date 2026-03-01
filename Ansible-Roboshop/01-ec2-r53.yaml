@@ -1,17 +1,17 @@
 - name: create ec2 and r53
   hosts: local
   connection: local
-  collections:
-    - amazon.aws
-
   vars:
     ami_id: ami-0220d79f3f480ecf5
-    sg_id: sg-05070ca66b56218cd
-    zone_id: Z026569833PO0BSJDM4X5
-    domain_name: cloudskills.fun
-    instances:
-      - mongodb
-
+    sg_id: sg-05070ca66b56218cd # replace with your SG ID
+    zone_id: "Z026569833PO0BSJDM4X" # replace with your ID
+    domain_name: "cloudskills.fun"
+    # we can pass instances through command line using -e
+    instances: 
+     - mongodb
+    # - redis
+    # - mysql
+    # - rabbitmq
   tasks:
   - name: create ec2 instance
     amazon.aws.ec2_instance:
@@ -23,6 +23,16 @@
         Name: "{{ item }}"
     loop: "{{ instances }}"
     register: ec2_output
+
+  # - name: print the ec2_output
+  #   ansible.builtin.debug:
+  #     msg: "{{ ec2_output }}"
+
+    #  ami_id: ami-0220d79f3f480ecf5
+    # sg_id: sg-05070ca66b56218cd
+    # zone_id: Z026569833PO0BSJDM4X5
+    # domain_name: cloudskills.fun
+
   #  - name: print public ipaddress
   #    ansible.builtin.debug:
   #       msg: "{{ item.instances[0].public_ip_address }}"
