@@ -34,8 +34,8 @@
   #       msg: "{{ item.instances[0].private_ip_address }}"
   #    loop: "{{ ec2_output.results }}"
     
-   - name: create route53 record 
-     amazon.aws.route53: 
+  - name: create route53 record 
+    amazon.aws.route53: 
         state: present
         zone: "{{ domain_name }}"
         record: "{{ item.item }}.{{domain_name}}"    #mongodb.cloudskills.fun
@@ -43,5 +43,5 @@
         ttl: 1
         value: "{{ item.instances[0].private_ip_address }}"
         overwrite: true 
-     loop: "{{ ec2_output.results }}"
+    loop: "{{ ec2_output.results }}"
      
