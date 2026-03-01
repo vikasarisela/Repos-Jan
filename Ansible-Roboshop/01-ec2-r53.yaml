@@ -1,7 +1,8 @@
-
 - name: create ec2 and r53
   hosts: local
   connection: local
+  collections:
+    - amazon.aws
 
   vars:
     ami_id: ami-0220d79f3f480ecf5
@@ -13,20 +14,16 @@
 
   tasks:
     - name: Creating ec2 instance
-      amazon.aws.ec2_instance:
+      ec2_instance:
         name: "{{ item }}"
         instance_type: t2.micro
-        security_group: "{{ sg_id }}"
+        security_groups:
+          - "{{ sg_id }}"
         image_id: "{{ ami_id }}"
         tags:
           Name: "{{ item }}"
       loop: "{{ instances }}"
       register: ec2_output
-
-    - name: printing the output
-      ansible.builtin.debug:
-        msg: "{{ ec2_output }}"
-        
   #  - name: print public ipaddress
   #    ansible.builtin.debug:
   #       msg: "{{ item.instances[0].public_ip_address }}"
