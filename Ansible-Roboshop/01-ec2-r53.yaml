@@ -8,20 +8,20 @@
    domain_name: cloudskills.fun
    instances: 
    - mongodb
-   tasks:
-   - name: Creating ec2 instance
-     amazon.aws.ec2_instance:
+  tasks:
+  - name: Creating ec2 instance
+    amazon.aws.ec2_instance:
        name: "{{ item }}"  # passing from instances loop
        instance_type: t2.micro
        security_group: "{{ sg_id }}"
        image_id: "{{ ami_id }}"
        tags:
          Name: "{{ item }}"
-     loop: "{{ instances }}"
-     register: ec2_output    # for outup printing we are using taking in ec2_output
+    loop: "{{ instances }}"
+    register: ec2_output    # for outup printing we are using taking in ec2_output
     
-   - name: printing the output
-     ansible.builtin.debug:
+  - name: printing the output
+    ansible.builtin.debug:
         msg: "{{ ec2_output }}"
 
   #  - name: print public ipaddress
