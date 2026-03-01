@@ -1,13 +1,33 @@
+# - name: user creation
+#   hosts: local
+#   connection: local
+#   become: yes
+#   tasks:
+#   - name: Create user vikas
+#     ansible.builtin.user:
+#       name: vikas
+#       state: present
+  
+#   - name: Print message
+#     ansible.builtin.debug:
+#         msg: "Hello Vikas.."
+
 - name: user creation
   hosts: local
   connection: local
   become: yes
   tasks:
-  - name: Create user vikas
-    ansible.builtin.user:
-      name: vikas
-      state: present
-  
-  - name: Print message
+  - name: check user exist or not
+    ansible.builtin.command: id roboshop
+    register: user_output
+    ignore_errors: true
+
+  - name: print the output
     ansible.builtin.debug:
-        msg: "Hello Vikas.."
+      msg: "{{ user_output }}"
+
+  - name: create user
+    ansible.builtin.command: useradd roboshop
+    when: user_output.rc != 0
+
+#here you can handle error by using ignoreerror keyword
