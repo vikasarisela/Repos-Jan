@@ -1,0 +1,10 @@
+- name: passing with arguments
+  hosts: local
+  connection: local
+  tasks:
+  - name: print the info 
+    ansible.builtin.debug:
+        msg: "{{nmee}} {{designationn}}"
+
+
+ #ansible-playbook -i inventory.ini -e ansible_user=ec2-user -e ansible_password=DevOps321 -e "nmee=vikas" -e "designationn=DevOps Engineer" 08-var-args.yaml

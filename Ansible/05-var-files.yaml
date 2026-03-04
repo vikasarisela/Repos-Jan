@@ -1,9 +1,12 @@
 - name: variables from files
   hosts: local
   connection: local
-  vars_files:
+  vars_files:    #keyword
   - course.yaml
   tasks:
   - name: print infor
     ansible.builtin.debug:
       msg: "Info : {{nme}}, {{designation}}"
+
+
+  # Available to all tasks in that play

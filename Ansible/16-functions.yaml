@@ -1,3 +1,5 @@
+#functions == filters
+
 - name: functions
   hosts: local
   connection: local
@@ -95,4 +97,12 @@
     ansible.builtin.debug:
       msg: "{{ redirect_output }}"
 
-        
+  
+
+#   Jinja2 Filters (like functions)
+
+# Filters modify or process variables.
+
+# Example:
+
+# {{ variable | filter }}

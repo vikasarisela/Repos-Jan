@@ -1,0 +1,25 @@
+- name: vars preferences
+  hosts: frontend
+  vars:
+    NAME: from play level
+  vars_files:
+  - course.yaml
+  vars_prompt:
+  - name: NAME
+    prompt: what is your name ?
+    private: false
+  tasks:
+  - name: testing varaible preferences
+    vars:
+      NAME: from task level
+    ansible.builtin.debug:
+      msg: "Name: {{ NAME }}"
+  
+# 1. args or command line
+# 2. from task
+# 3. files
+# 4. prompt
+# 5. play level
+# 6. inventory
+
+# check my commenting each of the m

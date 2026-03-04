@@ -8,3 +8,6 @@
     ansible.builtin.debug:
        msg: "Give number {{number}} is less than 10"
     when: number < 10
+
+    #controlling the task execution based on condition 
+    #when condition don't meet it will skip the task 

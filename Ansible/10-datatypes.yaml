@@ -19,4 +19,4 @@
       msg: "Course name: {{ Course }}, Duration: {{ Duration }}, is it live?: {{ is_live }}, tools are: {{ tools }} concepts are: {{ concepts }}"
 
 # list: []
-# map: {}
+# map: {}  

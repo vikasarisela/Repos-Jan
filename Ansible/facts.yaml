@@ -7,10 +7,41 @@
     ansible.builtin.dnf:
       name: nginx
       state: latest
-    when: ansible_os_family == "RedHat" # use ansible_ while referring the facts
+    when: ansible_os_family == "RedHat" # use "ansible_"  while referring the facts
 
   - name: install nginx if redhat
     ansible.builtin.apt:
       name: nginx
       state: latest
+      update_cache: yes
     when: ansible_os_family == "Debian"
+
+
+#     Use the package module which automatically chooses the correct package manager.
+
+# - hosts: all
+#   become: yes
+
+#   tasks:
+#     - name: Install nginx
+#       package:
+#         name: nginx
+#         state: present
+
+
+# - hosts: all
+#   become: yes
+#   tasks:
+
+#     - name: Install nginx on Debian
+#       apt:
+#         name: nginx
+#         state: present
+#         update_cache: yes
+#       when: ansible_os_family == "Debian"
+
+#     - name: Install nginx on RedHat
+#       yum:
+#         name: nginx
+#         state: present
+#       when: ansible_os_family == "RedHat"

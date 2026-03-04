@@ -11,3 +11,21 @@
     - { name: "nginx", state: "absent"}
     - { name: "mysql", state: "absent"}
     - { name: "zip", state: "latest"}
+
+#some i want to install and some uninstall
+
+# - hosts: localhost
+#   vars:
+#     users:
+#       - ram
+#       - sam
+#       - tom
+
+#   tasks:
+#     - name: Print users
+#       debug:
+#         msg: "{{ item }}"
+#       loop: "{{ users }}"
+
+# Loop in Ansible allows one task to run multiple times with different values.
+# item is reserved

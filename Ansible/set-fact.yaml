@@ -1,0 +1,19 @@
+- name: Play 1
+  hosts: localhost
+  vars_prompt:
+    - name: username
+      prompt: "Enter username"
+      private: no
+
+  tasks:
+    - name: Save variable globally
+      set_fact:
+        global_username: "{{ username }}"
+
+- name: Play 2
+  hosts: localhost
+  tasks:
+    - debug:
+        msg: "{{ global_username }}"
+
+# if you want to use vars_prompt in other play use set_fact

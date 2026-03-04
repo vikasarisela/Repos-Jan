@@ -6,3 +6,11 @@
   - name: facts
     ansible.builtin.debug:
       msg: "{{ ansible_facts }}"
+
+
+# ansible_facts are system information collected automatically by Ansible from the target server
+# "This server OS is {{ ansible_facts['distribution'] }}"
+# ansible_facts['hostname']
+# It is a variable (dictionary) created by Ansible when it gathers system information.
+# ansible_facts saved under facts.json 
+# the info is used for our use , used under facts.yaml
