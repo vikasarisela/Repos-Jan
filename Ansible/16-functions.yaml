@@ -4,7 +4,7 @@
   hosts: local
   connection: local
   vars:
-    technologies: DevOps, Linux, Ansible # string
+    technologies: DevOps, Linux, Ansible # one string
     name: "Vikas"
     gmail: Info@GMAIL.COM
     ipaddress: "19222.168.0.1"
@@ -28,31 +28,37 @@
     ansible.builtin.debug:
       msg: "Technologies are: {{ technologies | split(',') }}"
       #output ['DevOps', 'Linux', 'Ansible']
-
+#split() is used to convert a string into a list by separating it using a delimiter (separator).
   - name: convert map to list
     ansible.builtin.debug:
       msg: "Tags are: {{ tags | dict2items }}"
       #list of dictonaries
-    
+ #dict2items is an Ansible filter used to convert a dictionary into a list of key-value pairs.   
     #[{'key':'Application', 'value': 'Payment'}, {'key': 'Environment', 'value': 'dev'}]
 
   - name: convert list into map
     ansible.builtin.debug:
       msg: "tag map: {{ listTags | items2dict }}"
+   #tag map: {'Application': 'payment', 'Environment': 'dev'}
+   #items2dict converts it into a single dictionary
+
+
 
 #==============================================
+# read a YAML file (student.yaml) and convert it into an Ansible variable
   - name: read yaml and take it into variable
     ansible.builtin.set_fact:
       student_yaml: "{{ lookup('file', 'student.yaml') | from_yaml }}"
     #When the task executes, the file is read, converted, and stored into a new variable using set_fact.
     #ie sutdent_yaml
+
   - name: convert yaml into json
     ansible.builtin.debug:
       msg: "json: {{ student_yaml | to_json  }}"
 
   - name: save json to file
     ansible.builtin.copy:
-      dest: ./stundent-data.json
+      dest: ./student-data.json
       content: "{{ student_yaml | to_nice_json  }}"
 #===================================================
 
