@@ -24,6 +24,7 @@
     loop: "{{ instances }}"
     register: ec2_output
 
+
 #  The variable ec2_output stores the output returned by the module amazon.aws.ec2_instance, which internally talks to AWS APIs.
   - name: print the ec2_output
     ansible.builtin.debug:
