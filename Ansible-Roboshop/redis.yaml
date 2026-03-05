@@ -1,0 +1,36 @@
+#enable and disable module not avaiable in 
+- name: Configure Redis module
+  hosts: redis
+  become: yes
+
+  tasks:
+    - name: Disable default Redis module
+      command: dnf module disable redis -y
+
+    - name: Enable Redis 7 module
+      command: dnf module enable redis:7 -y 
+
+    - name: install redis
+      ansible.builtin.package:
+        name: redis
+        state: present
+
+    - name: Allow remote connections
+      ansible.builtin.replace:
+       path: /etc/redis/redis.conf
+       regexp: '127.0.0.1'
+       replace: '0.0.0.0'
+
+    - name: Disable redis protected mode
+      ansible.builtin.lineinfile:
+       path: /etc/redis/redis.conf
+       regexp: '^protected-mode'
+       line: 'protected-mode no'
+       become: yes
+
+    - name: Start and Enable Redis
+      ansible.builtin.service:
+      name: redis
+      state: started
+      enabled: yes
+    
