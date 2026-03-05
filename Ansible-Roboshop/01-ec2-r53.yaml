@@ -9,7 +9,7 @@
     # we can pass instances through command line using -e
     instances: 
      - mongodb
-    # - redis
+     - redis
     # - mysql
     # - rabbitmq
   tasks:
