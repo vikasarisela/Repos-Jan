@@ -49,8 +49,12 @@
   - name: read yaml and take it into variable
     ansible.builtin.set_fact:
       student_yaml: "{{ lookup('file', 'student.yaml') | from_yaml }}"
-    #When the task executes, the file is read, converted, and stored into a new variable using set_fact.
-    #ie sutdent_yaml
+#When the task executes, the file is read, converted, and stored into a new variable using set_fact.
+#ie sutdent_yaml
+# lookup Reads the student.yaml file and loads the content as plain text ,At this stage Ansible sees it as a string, not YAML.
+# from_yaml Converts the string into a YAML data structure (dictionary/list).
+# set_fact is a module used to create or assign variables during playbook execution (runtime).
+
 
   - name: convert yaml into json
     ansible.builtin.debug:
@@ -60,7 +64,7 @@
     ansible.builtin.copy:
       dest: ./student-data.json
       content: "{{ student_yaml | to_nice_json  }}"
-#===================================================
+#=================================================================
 
   - name: convert uppercase
     ansible.builtin.debug:

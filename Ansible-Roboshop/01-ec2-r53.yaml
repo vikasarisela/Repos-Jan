@@ -24,15 +24,12 @@
     loop: "{{ instances }}"
     register: ec2_output
 
-  # - name: print the ec2_output
-  #   ansible.builtin.debug:
-  #     msg: "{{ ec2_output }}"
+#  The variable ec2_output stores the output returned by the module amazon.aws.ec2_instance, which internally talks to AWS APIs.
+  - name: print the ec2_output
+    ansible.builtin.debug:
+      msg: "{{ ec2_output }}"
 
-    #  ami_id: ami-0220d79f3f480ecf5
-    # sg_id: sg-05070ca66b56218cd
-    # zone_id: Z026569833PO0BSJDM4X5
-    # domain_name: cloudskills.fun
-
+ 
   #  - name: print public ipaddress
   #    ansible.builtin.debug:
   #       msg: "{{ item.instances[0].public_ip_address }}"
