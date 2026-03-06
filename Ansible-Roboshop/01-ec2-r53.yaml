@@ -9,7 +9,7 @@
     # we can pass instances through command line using -e
     instances: 
      - mongodb
-   #  - redis
+    # - redis
     # - mysql
     # - rabbitmq
   tasks:
@@ -30,7 +30,7 @@
     ansible.builtin.debug:
       msg: "{{ ec2_output }}"
 
- 
+ # results [{instances [{ private_ip_address}]
   #  - name: print public ipaddress
   #    ansible.builtin.debug:
   #       msg: "{{ item.instances[0].public_ip_address }}"
